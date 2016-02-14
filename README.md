@@ -1,20 +1,23 @@
-# react-native-html-render
+# react-native-html2native
+
+FORK FROM https://github.com/soliury/react-native-html-render
+
 > A html render for react-native. But don't **Suitable for** all html. Only **Suitable for** the html generator by markdown with minify.
-> 
+>
 > Now it used by [Noder](https://github.com/soliury/noder-react-native).
 >
-> Be careful to use, the performance is not good. If you want to improve the performance, be free to open a issue or send a PR. 
+> Be careful to use, the performance is not good. If you want to improve the performance, be free to open a issue or send a PR.
 
 
 ## Install
 
 ```
-npm install react-native-html-render
+npm install react-native-html2native
 ```
 
 ## Futures
 
-* Support img and code render. 
+* Support img and code render.
 * Can set custom render function and styles.
 * More beautiful native View.
 
@@ -175,7 +178,7 @@ var blockTagArr = ['div', 'p', 'img', 'address',
 
 var inlineTagArr = ['a', 'abbr', 'b', 'big',
     'br', 'cite', 'code', 'em', 'label', 'span', 'strong']
-    
+
 ```
 
 ## FAQ
@@ -185,7 +188,3 @@ More details see [Noder](https://github.com/soliury/noder-react-native).
 ## Licenses
 
 [MIT](https://opensource.org/licenses/MIT)
-
-
-
-

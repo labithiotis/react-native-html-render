@@ -1,6 +1,6 @@
 {
-  "name": "react-native-html-render",
-  "version": "1.0.3",
+  "name": "react-native-html2native",
+  "version": "1.0.0",
   "description": "A html render for react-native",
   "main": "index.js",
   "scripts": {
@@ -8,19 +8,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/soliury/react-native-html-render.git"
+    "url": "git+https://github.com/labithiotis/react-native-html-render.git"
   },
   "keywords": [
     "react-component",
     "react-native",
     "ios"
   ],
-  "author": "soliury",
-  "license": "ISC",
+  "author": "Darren Labithiotis",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/soliury/react-native-html-render/issues"
+    "url": "https://github.com/labithiotis/react-native-html-render/issues"
   },
-  "homepage": "https://github.com/soliury/react-native-html-render#readme",
+  "homepage": "https://github.com/labithiotis/react-native-html-render#readme",
   "devDependencies": {
     "chai": "^3.0.0",
     "istanbul": "^0.3.17",
