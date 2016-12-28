@@ -1,9 +1,10 @@
-# OSX
-#
+node_modules/
 .DS_Store
-
-# Xcode
-#
+*.log
+react-packager-cache**
+# Webstorm
+.idea
+# IOS Junk
 build/
 *.pbxuser
 !default.pbxuser
@@ -21,18 +22,5 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
-
-# node.js
-#
-node_modules/
-npm-debug.log
-
-.idea
-
-app/mock/user.js
-
-react-packager-cache**
-.rnplay
-tmp
 
 

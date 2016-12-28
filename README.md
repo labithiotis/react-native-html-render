@@ -1,190 +1,62 @@
-# react-native-html2native
+# React Native HTML 2 Native
+A component which takes HTML content and renders it as native views.
 
-FORK FROM https://github.com/soliury/react-native-html-render
+### Props
 
-> A html render for react-native. But don't **Suitable for** all html. Only **Suitable for** the html generator by markdown with minify.
->
-> Now it used by [Noder](https://github.com/soliury/noder-react-native).
->
-> Be careful to use, the performance is not good. If you want to improve the performance, be free to open a issue or send a PR.
+- `value`: a string of HTML content to render
+- `onLinkPress`: a function which will be called with a url when a link is pressed.
+  Passing this prop will override how links are handled (defaults to calling `Linking.openURL(url)`)
+- `stylesheet`: a stylesheet object keyed by tag name, which will override the 
+  styles applied to those respective tags.
+- `renderNode`: a custom function to render HTML nodes however you see fit. If 
+  the function returns `undefined` (not `null`), the default renderer will be 
+  used for that node.
 
+### example
 
-## Install
+```js
+import React, { Component } from 'react'
+import ReactNative from 'react-native'
+const { Text, View, ListView } = ReactNative
 
-```
-npm install react-native-html2native
-```
+const HTMLView = require('react-native-html2native')
 
-## Futures
+class App extends Component {
+  render() {
+    const content = '<p><a href="http://google.com">Google it FTW!</a></p>'
 
-* Support img and code render.
-* Can set custom render function and styles.
-* More beautiful native View.
-
-## Demo
-
-![noder-demo](http://7lrzfj.com1.z0.glb.clouddn.com/soliurynoder-html-render.gif)
-
-## Example
-
-```
-var React = require('react-native')
-
-var HtmlRender = require('react-native-html-render')
-
-var window = require('../../util/window')
-var routes = require('../../configs/routes')
-
-
-var { width, height } = window.get()
-
-var {
-    Component,
-    View,
-    Text,
-    StyleSheet,
-    Image,
-    LinkingIOS,
-    Navigator
-    }=React
-
-var contentFontSize = 16
-
-
-var styles = StyleSheet.create({
-    img: {
-        width: width - 30,
-        height: width - 30,
-        resizeMode: Image.resizeMode.contain
-    }
+    return (
+      <HTMLView
+        value={content}
+        stylesheet={styles}
+      />
+    )
+  }
 })
 
-
-class HtmlContent extends Component {
-    constructor(props) {
-        super(props)
-    }
-
-
-    _onLinkPress(url) {
-        if (/^\/user\/\w*/.test(url)) {
-            let authorName = url.replace(/^\/user\//, '')
-            routes.toUser(this, {
-                userName: authorName
-            })
-        }
-
-        if (/^https?:\/\/.*/.test(url)) {
-            window.link(url)
-        }
-    }
-
-
-    _renderNode(node, index, parent, type) {
-        var name = node.name
-        if (node.type == 'block' && type == 'block') {
-            if (name == 'img') {
-                var uri = node.attribs.src;
-                if (/^\/\/dn-cnode\.qbox\.me\/.*/.test(uri)) {
-                    uri = 'https:' + uri
-                }
-                return (
-                    <View
-                        key={index}
-                        style={styles.imgWrapper}>
-                        <Image source={{uri:uri}}
-                               style={styles.img}>
-                        </Image>
-                    </View>
-                )
-            }
-        }
-    }
-
-
-    render() {
-        return (
-            <HtmlRender
-                value={this.props.content}
-                stylesheet={this.props.style}
-                onLinkPress={this._onLinkPress.bind(this)}
-                renderNode={this._renderNode}
-                />
-        )
-    }
-
-}
-
-module.exports = HtmlContent
+const styles = StyleSheet.create({
+  a: {
+    fontWeight: '300',
+    color: '#FF0000'
+  }
+})
 ```
 
-## API
+When a link is clicked, by default `ReactNative.Linking.openURL` is called with the 
+link url. You can customise what happens when a link is clicked with `onLinkPress`:
 
-### `value`
+```js
+import React, { Component } from 'react'
+import ReactNative from 'react-native'
 
-The value of html content.
-
-### `stylesheet`
-
-Custom styles
-
-### `onLinkPress`
-
-Handle the link click event.
-
-### `renderNode`
-
-Custom render function.
-
-The render function has three arguments.
-
-**node**: A Object show the node of html.
-
-Struct:
-
+class ContentView extends Component {
+  render() {
+    return (
+      <HTMLView
+        value={this.props.html}
+        onLinkPress={(url) => console.log('Link clicked: ', url)}
+      />
+    )
+  }
+})
 ```
-{
-    name:'text',
-    text: String,
-    parent: Object,
-    type: String
-}
-
-or If the node is not a text node:
-
-{
-    name: String,
-    attribs: Object,
-    type: String,
-    parent: Object
-}
-
-```
-
-**index**: The index of the node in the parent node.
-
-**parent**: The parent of the node.
-
-**type**: Only two types: `block` or `inline`.
-
-Mor details:
-
-```
-
-var blockTagArr = ['div', 'p', 'img', 'address',
-    'blockquote', 'dir', 'dl',
-    'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-    'menu', 'ol', 'pre', 'table', 'ul', 'li', 'hr']
-
-var inlineTagArr = ['a', 'abbr', 'b', 'big',
-    'br', 'cite', 'code', 'em', 'label', 'span', 'strong']
-
-```
-
-## FAQ
-
-More details see [Noder](https://github.com/soliury/noder-react-native).
-
-## Licenses
-
-[MIT](https://opensource.org/licenses/MIT)
